@@ -5,8 +5,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,13 +35,20 @@ public class TestController {
 				+ "      \"numOfMatches\": 300,\r\n"
 				+ "      \"maxResults\":600,\r\n"
 				+ "      \"major\":0,\r\n"
+				
+				
 				+ "      \"minor\":0,\r\n"
 				+ "      \"startTime\":\"2022-09-09T17:30:08+08:00\",\r\n"
 				+ "      \"endTime\":\"2022-12-12T17:30:08+08:00\"\r\n"
 				+ "   }\r\n"
 				+ "}";
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(MediaType.APPLICATION_JSON);
+//		HttpHeaders headers = new HttpHeaders(){
+//			{
+//				set( "Authorization", authHeader );
+//				set("MediaType", MediaType.APPLICATION_JSON);
+//			}
+//		};
+		
 		HttpEntity<String> entity = new HttpEntity<String>(body);
 		ResponseEntity<String> response = restTemplate.exchange(http_url, HttpMethod.GET, entity, String.class);
 	    System.out.println(response.getStatusCode());
